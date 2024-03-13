@@ -3,14 +3,17 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       xmlns:text-align="http://www.w3.org/1999/xhtml">
 <head>
-  <title>List users</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Main page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-    <div th:inline="text" style="text-align:right">Auth: <span th:remove="tag" sec:authentication="name">thymeleaf</span></div>
+    <h3>Main page</h3>
+    <div th:inline="text" style="text-align:right">Auth: <span th:remove="tag" sec:authentication="name">thymeleaf</span>
     <form th:action="@{/logout}" method="post" style="text-align:right">
-        <input type="submit" value="Log Out"/>
+        <input type="submit" value="Logout"/><br>
+        <span><a href="/user">User list</a></span>
     </form>
+    </div>
     <div>
         <form method="post">
             <div style="margin: 5px 0 5px 20px; display:block;"></div>

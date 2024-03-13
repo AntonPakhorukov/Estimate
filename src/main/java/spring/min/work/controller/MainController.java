@@ -30,11 +30,11 @@ public class MainController {
         return "main";
     }
 
-    @GetMapping("/main/users")
-    public String getAll(Model model) {
-        model.addAttribute("users", userRepository.findAll());
-        return "listUsers";
-    }
+//    @GetMapping("/main/users")
+//    public String getAll(Model model) {
+//        model.addAttribute("users", userRepository.findAll());
+//        return "listUsers";
+//    }
 //    @PostMapping
 //    public String add(@RequestParam String name,
 //                      @RequestParam String email,
@@ -55,8 +55,10 @@ public class MainController {
 //                             @RequestParam String filter,
                              Model model){
         Message message = new Message(text, tag);
+        System.out.println("one: " + message.getText());
         messageRepository.save(message);
         List<Message> messages = messageRepository.findAll();
+        messages.stream().forEach(System.out::println);
         model.addAttribute("messages", messages);
         return "main";
     }
