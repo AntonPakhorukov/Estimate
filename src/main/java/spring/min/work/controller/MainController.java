@@ -1,41 +1,36 @@
 package spring.min.work.controller;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import spring.min.work.domain.Message;
-import spring.min.work.domain.User;
 import spring.min.work.repository.MessageRepository;
 import spring.min.work.repository.UserRepository;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Controller
 //@RequestMapping("/new")
-public class FirstController {
+public class MainController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private MessageRepository messageRepository;
 
-    @GetMapping("/first")
-    public String first(@RequestParam(name = "name", required = false, defaultValue = "world") String name, Model model) {
-        model.addAttribute("name", name);
+    @GetMapping({"", "/"})
+    public String first(Model model) {
+//        model.addAttribute("name", );
         return "first";
     }
 
-    @GetMapping({"", "/"})
+    @GetMapping("/main")
     public String main(String message, Model model) {
         model.addAttribute("messages", messageRepository.findAll());
         return "main";
     }
 
-    @GetMapping("/users")
+    @GetMapping("/main/users")
     public String getAll(Model model) {
         model.addAttribute("users", userRepository.findAll());
         return "listUsers";
@@ -54,7 +49,7 @@ public class FirstController {
 //        return "main";
 //    }
 
-    @PostMapping
+    @PostMapping("/main")
     public String addMessage(@RequestParam String text,
                              @RequestParam String tag,
 //                             @RequestParam String filter,
@@ -65,14 +60,14 @@ public class FirstController {
         model.addAttribute("messages", messages);
         return "main";
     }
-    @PostMapping("/deleteAll")
+    @PostMapping("/main/deleteAll")
     public String deleteAll(Model model){
         messageRepository.deleteAll();
 
         model.addAttribute("messages", messageRepository.findAll());
-        return "redirect:/";
+        return "redirect:/main";
     }
-    @PostMapping("/filter")
+    @PostMapping("/main/filter")
     public String filter(@RequestParam String filter, Model model){
         String path;
         List<Message> messages;
@@ -81,7 +76,7 @@ public class FirstController {
             path = "main";
         } else {
             messages = messageRepository.findAll();
-            path = "redirect:/";
+            path = "redirect:/main";
 
         }
         model.addAttribute("messages", messages);

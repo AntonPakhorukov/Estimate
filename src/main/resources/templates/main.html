@@ -1,21 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:text-align="http://www.w3.org/1999/xhtml">
 <head>
   <title>List users</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
+    <div th:inline="text" style="text-align:right">Auth: <span th:remove="tag" sec:authentication="name">thymeleaf</span></div>
+    <form th:action="@{/logout}" method="post" style="text-align:right">
+        <input type="submit" value="Log Out"/>
+    </form>
     <div>
         <form method="post">
+            <div style="margin: 5px 0 5px 20px; display:block;"></div>
             <input type="text" name="text" placeholder="Message">
             <input type="text" name="tag" placeholder="Tag">
             <button type="submit">Enter</button>
         </form>
-        <form action="#" th:action="@{/deleteAll}" method="post">
+        <form action="#" th:action="@{/main/deleteAll}" method="post">
             <div style="margin: 5px 0 5px 20px; display:block;"></div>
             <button type="submit" >DeleteAllMessage</button>
         </form>
-        <form action="#" th:action="@{/filter}" method="post">
+        <form action="#" th:action="@{/main/filter}" method="post">
             <div style="margin: 5px 0 5px 20px; display:block;"></div>
             <input type="text" name="filter" id="filter">
             <button type="submit">Find</button>
