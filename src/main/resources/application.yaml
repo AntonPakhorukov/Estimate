@@ -1,0 +1,18 @@
+spring:
+  main:
+    allow-circular-references: true
+  jpa:
+    generate-ddl: true # возьмет на себя создание структуры данных БД
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tasks
+    username: user
+    password: password
+  flyway:
+    baseline-on-migrate: true

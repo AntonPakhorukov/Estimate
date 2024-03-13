@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>List users</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+    <div>
+        <form method="post">
+            <input type="text" name="text" placeholder="Message">
+            <input type="text" name="tag" placeholder="Tag">
+            <button type="submit">Enter</button>
+        </form>
+        <form action="#" th:action="@{/deleteAll}" method="post">
+            <div style="margin: 5px 0 5px 20px; display:block;"></div>
+            <button type="submit" >DeleteAllMessage</button>
+        </form>
+        <form action="#" th:action="@{/filter}" method="post">
+            <div style="margin: 5px 0 5px 20px; display:block;"></div>
+            <input type="text" name="filter" id="filter">
+            <button type="submit">Find</button>
+        </form>
+    </div>
+    <div>List message </div>
+    <table>
+        <tr> <!-- Создание заголовочной строки, указываем ее значение-->
+            <th>ID</th>
+            <th>Text</th>
+            <th>Tag</th>
+        </tr>
+        <tr th:each="message: ${messages}">
+            <td th:text="${message.id}"></td> <!-- Создание строки с данными -->
+            <td th:text="${message.text}"></td> <!-- То, что находится внутри тега а = является ссылкой -->
+            <td th:text="${message.tag}"></td>
+        </tr>
+    </table>
+<!--    <div>-->
+<!--        <b th:text="${message.id}"></b>-->
+<!--        <b th:text="${message.text}"></b>-->
+<!--        <b th:text="${message.tag}"></b>-->
+<!--    </div>-->
+
+
+<!--    <div>-->
+<!--        <form method="post">-->
+<!--            <input type="text" name="name" placeholder="Введите имя пользователя" /><br>-->
+<!--            <input type="text" name="email" placeholder="Введите email пользователя" /><br>-->
+<!--            <input type="text" name="password" placeholder="Введите password пользователя" /><br>-->
+<!--            <label>Archive</label><br>-->
+<!--            <input type="radio" id="true" value="true" name="archive"><label for="true" class="user">True</label>-->
+<!--            <input type="radio" id="false" value="false" name="archive"><label for="false" class="user">False</label><br>-->
+<!--            <input type="text" name="archive" placeholder="Пользователь active?" />-->
+<!--            <input type="text" name="phone" placeholder="Введите телефон" /><br>-->
+<!--            <input type="text" name="address" placeholder="Введите адрес" /><br>-->
+<!--            <button type="submit">Добавить</button>-->
+<!--        </form>-->
+<!--    </div>-->
+
+<p th:text="${message}"></p>
+</body>
+</html>
