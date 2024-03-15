@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -36,6 +37,9 @@ public class User {
 //    private Bucket bucket;
     private String phone;
     private String address;
+    @OneToMany
+    @JoinColumn(name = "estimate_id")
+    private List<Estimate> estimates;
 
     public User(String username, String password) {
         this.username = username;

@@ -7,19 +7,30 @@
 <body>
     <h3>User list</h3>
     <table>
-      <tr> <!-- Создание заголовочной строки, указываем ее значение-->
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Active</th>
-      </tr>
-      <tr th:each="user: ${users}">
-        <td th:text="${user.id}"></td> <!-- Создание строки с данными -->
-        <td th:text="${user.username}"></td> <!-- То, что находится внутри тега а = является ссылкой -->
-        <td th:text="${user.email}"></td>
-        <td th:text="${user.active}"></td>
-        <td><a href="/user/${user.id}">Edit</a></td>
-      </tr>
+        <thead>
+        <tr> <!-- Создание заголовочной строки, указываем ее значение-->
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Active</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${users}" th:object="${selectedRoles}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.active}"></td>
+<!--            <li th:text="${user.role}"></li>-->
+<!--                <td th:for="${role}" th:text="${role}">Role</td>-->
+            <td><a th:href="@{'/user/' + ${user.id}}">Edit</a></td>
+        </tr>
+        <tr th:each="role: ${roles}">
+            <input type="text" th:id="role" th:name="selectedRoles" th:value="${role}"/>
+            <label th:for="${role}" th:text="${role}">Role</label>
+        </tr>
+        </tbody>
     </table>
 </body>
 </html>

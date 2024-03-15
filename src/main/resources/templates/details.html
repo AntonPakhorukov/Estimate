@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:text-align="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Details</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 90%;
+            border-spacing: 10px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 20 px;
+            text-align: center;
+            margin: 10px
+        }
+    </style>
+</head>
+<body>
+<div style="text-align:left">
+    <form th:action="@{/details}" method="post" style="text-align:left">
+        <input type="submit" name="button" value="Back"/>
+<!--        <input type="submit" name="button" value="UserList">-->
+    </form>
+</div>
+<h3 style="text-align: center">Детализация ремонта:</h3>
+<table>
+    <tr>
+        <th>Помещение</th>
+        <th>Категория</th>
+        <th>Описание</th>
+        <th>Производитель</th>
+        <th>Продукт</th>
+        <th>Количество</th>
+        <th>Цена</th>
+        <th>Сумма</th>
+    </tr>
+</table>
+</body>
+</html>

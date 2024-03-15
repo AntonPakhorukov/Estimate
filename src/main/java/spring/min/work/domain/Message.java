@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Message {
-    private static final String SEQ_MES = "seq_mes";
+    private static final String SEQ_TYPE = "seq_mes";
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_MES)
-    @SequenceGenerator(name = SEQ_MES, sequenceName = SEQ_MES, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_TYPE)
+    @SequenceGenerator(name = SEQ_TYPE, sequenceName = SEQ_TYPE, allocationSize = 1)
     private Integer id;
     private String text;
     private String tag;

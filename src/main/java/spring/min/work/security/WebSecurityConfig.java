@@ -1,6 +1,5 @@
 package spring.min.work.security;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,11 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
@@ -33,7 +28,8 @@ public class WebSecurityConfig {
                         .loginPage("/login")
                         .permitAll()
                 )
-                .logout((logout) -> logout.permitAll());
+                .logout((logout) -> logout.permitAll()
+                        .deleteCookies("JSESSIONID"));
 
         return http.build();
     }

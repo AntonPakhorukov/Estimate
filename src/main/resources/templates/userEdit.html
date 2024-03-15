@@ -1,12 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>User edit</title>
+    <title>Edit User</title>
 </head>
 <body>
-    <form action="/user" method="post">
-        
+    <h3>Edit user</h3>
+    <form action="/user" method="post" th:object="${selectedRoles}">
+        <input type="text" name="username" value="${session.user.username}" /><br>
+        <div style="margin: 5px 0 5px 20px; display:block;"></div>
+        <input type="text" placeholder="set password" name="password"><br>
+        <input type="text" value="${user.id}" readonly /><br>
+<!--        <tr th:each="role: ${roles}">-->
+<!--            <input type="checkbox" th:id="role" th:name="selectedRoles" th:value="${role}"/>-->
+<!--            <label th:for="${role}" th:text="${role}">Role</label><br>-->
+        </tr>
         <button type="submit">Save</button>
     </form>
 </body>
