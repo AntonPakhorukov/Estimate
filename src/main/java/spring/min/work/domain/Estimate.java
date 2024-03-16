@@ -1,18 +1,12 @@
 package spring.min.work.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
-//@AllArgsConstructor
 @Table(name = "estimate")
 public class Estimate {
     private static final String SEQ_TYPE = "seq_est";
@@ -32,18 +26,19 @@ public class Estimate {
     @JoinColumn(name = "usr_id")
     private User user;
 
-    public Estimate(String room, String category, String description, String manufacturer, String product, String quantity, String price) {
+    public Estimate(String room, String category, String description, String manufacturer,
+                    String product, String quantity, String price) {
         this.room = room;
         this.category = category;
         this.description = description;
         this.manufacturer = manufacturer;
         this.product = product;
-        if(quantity != null && Integer.valueOf(quantity) > 0) {
+        if (quantity != null && Integer.valueOf(quantity) > 0) {
             this.quantity = quantity;
         } else {
             this.quantity = "1";
         }
-        if(price != null && Double.valueOf(price) > 0) {
+        if (price != null && Double.valueOf(price) > 0) {
             this.price = price;
         } else {
             this.price = "1";

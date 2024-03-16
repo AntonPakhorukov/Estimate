@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
-      xmlns:text-align="http://www.w3.org/1999/xhtml" xmlns:margin-top="http://www.w3.org/1999/xhtml">
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Details</title>
@@ -29,145 +28,144 @@
         label {
             margin-top: 10px;
             display: block;
+
     </style>
     <link rel="stylesheet" href="/stylesCreate.css">
     <script>src/main/java="script.js" </script>
 </head>
 <body>
-    <div style="text-align:left">
-<!--    <form th:action="@{/mainPage}" method="get" style="text-align:left">-->
-    <form th:action="@{/createEstimate}" method="post" style="text-align:left">
-<!--        <input type="submit" name="button" value="Back"/>-->
-        <!--        <input type="submit" name="button" value="UserList">-->
+<!--<div style="text-align:left">-->
+<!--    <form th:action="@{/createEstimate}" method="post" style="text-align:left">-->
+<!--    </form>-->
+<!--</div>-->
+<div>
+    <form method="post" th:action="@{/createEstimate}">
+        <input type="hidden" name="username" id="username">
+        <input type="submit" name="button" value="Back"/>
+        <table id="select">
+            <tr>
+                <th>
+                    <label for="room" style="text-align:left">Select room</label>
+                    <select id="room" name="room">
+                        <optgroup label="rooms:">
+                            <option selected="selected" value="other">other</option>
+                            <option value="kitchen">kitchen</option>
+                            <option value="kitchen_living_room">kitchen_living_room</option>
+                            <option value="main_toilet">main_toilet</option>
+                            <option value="guest_toilet">guest_toilet</option>
+                            <option value="toilet">toilet</option>
+                            <option value="bedroom">bedroom</option>
+                            <option value="master_bedroom">master_bedroom</option>
+                            <option value="room">room</option>
+                            <option value="children_room">children_room</option>
+                            <option value="guest_room">guest_room</option>
+                            <option value="corridor">corridor</option>
+                            <option value="hallway">hallway</option>
+                            <option value="balcony">balcony</option>
+                            <option value="loggia">loggia</option>
+                        </optgroup>
+                    </select>
+                </th>
+                <th>
+                    <label for="category" style="text-align:left">Select category</label>
+                    <select id="category" name="category">
+                        <optgroup label="categories:">
+                            <option selected="selected" value="other">other</option>
+                            <option value="decoration">decoration</option>
+                            <option value="electrics">electrics</option>
+                            <option value="plumbing_fixtures">plumbing_fixtures</option>
+                            <option value="ventilation">ventilation</option>
+                            <option value="lighting">lighting</option>
+                        </optgroup>
+                    </select>
+                </th>
+                <th>
+                    <label for="description" style="text-align:left">Select description</label>
+                    <select id="description" name="description">
+                        <optgroup label="descriptions:">
+                            <option selected="selected" value="other">other</option>
+                            <option value="floor">floor</option>
+                            <option value="wall">wall</option>
+                            <option value="ceiling">ceiling</option>
+                            <option value="window">window</option>
+                            <option value="doors">doors</option>
+                            <option value="sockets">sockets</option>
+                            <option value="switches">switches</option>
+                            <option value="bath">bath</option>
+                            <option value="sanitaryware">sanitaryware</option>
+                            <option value="faucets">faucets</option>
+                            <option value="installation_system">installation_system</option>
+                            <option value="shower_cabins">shower_cabins</option>
+                            <option value="shower_systems">shower_systems</option>
+                            <option value="forced_ventilation">forced_ventilation</option>
+                            <option value="air_conditioner">air_conditioner</option>
+                            <option value="hood">hood</option>
+                            <option value="lamps">lamps</option>
+                            <option value="light_source">light_source</option>
+                            <option value="light_lines">light_lines</option>
+                            <option value="backlight">backlight</option>
+                        </optgroup>
+                    </select>
+                </th>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>
+                    <label for="manufacturer"><input type="text" id="manufacturer" name="manufacturer"
+                                                     placeholder="Производитель"></label>
+                </th>
+                <th>
+                    <label for="product"><input type="text" id="product" name="product" placeholder="Продукт"></label>
+                </th>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>
+                    <label for="quantity"><input type="text" pattern="[0-9.]*" id="quantity" name="quantity"
+                                                 placeholder="Количество"></label>
+                </th>
+                <th>
+                    <label for="price"><input type="text" pattern="[0-9.]*" id="price" name="price" placeholder="Цена"></label>
+                </th>
+            </tr>
+        </table>
+
+        <input type="submit" name="button" value="Enter" style="margin-top: 10px;">
     </form>
-    </div>
-    <div>
-        <form method="post" th:action="@{/createEstimate}">
-            <input type="submit" name="button" value="Back"/>
-            <table id="select">
-                <tr>
-                    <th>
-                        <label for="room" style="text-align:left">Select room</label>
-                        <select id="room" name="room">
-                            <optgroup label="rooms:">
-                                <option selected="selected" value="other">other</option>
-                                <option value="kitchen">kitchen</option>
-                                <option value="kitchen_living_room">kitchen_living_room</option>
-                                <option value="main_toilet">main_toilet</option>
-                                <option value="guest_toilet">guest_toilet</option>
-                                <option value="toilet">toilet</option>
-                                <option value="bedroom">bedroom</option>
-                                <option value="master_bedroom">master_bedroom</option>
-                                <option value="room">room</option>
-                                <option value="children_room">children_room</option>
-                                <option value="guest_room">guest_room</option>
-                                <option value="corridor">corridor</option>
-                                <option value="hallway">hallway</option>
-                                <option value="balcony">balcony</option>
-                                <option value="loggia">loggia</option>
-                            </optgroup>
-                        </select>
-                    </th>
-                    <th>
-                        <label for="category" style="text-align:left">Select category</label>
-                        <select id="category" name="category">
-                            <optgroup label="categories:">
-                                <option selected="selected" value="other">other</option>
-                                <option value="decoration">decoration</option>
-                                <option value="electrics">electrics</option>
-                                <option value="plumbing_fixtures">plumbing_fixtures</option>
-                                <option value="ventilation">ventilation</option>
-                                <option value="lighting">lighting</option>
-                            </optgroup>
-                        </select>
-                    </th>
-                    <th>
-                        <label for="description" style="text-align:left">Select description</label>
-                        <select id="description" name="description">
-                            <optgroup label="descriptions:">
-                                <option selected="selected" value="other">other</option>
-                                <option value="floor">floor</option>
-                                <option value="wall">wall</option>
-                                <option value="ceiling">ceiling</option>
-                                <option value="window">window</option>
-                                <option value="doors">doors</option>
-                                <option value="sockets">sockets</option>
-                                <option value="switches">switches</option>
-                                <option value="bath">bath</option>
-                                <option value="sanitaryware">sanitaryware</option>
-                                <option value="faucets">faucets</option>
-                                <option value="installation_system">installation_system</option>
-                                <option value="shower_cabins">shower_cabins</option>
-                                <option value="shower_systems">shower_systems</option>
-                                <option value="forced_ventilation">forced_ventilation</option>
-                                <option value="air_conditioner">air_conditioner</option>
-                                <option value="hood">hood</option>
-                                <option value="lamps">lamps</option>
-                                <option value="light_source">light_source</option>
-                                <option value="light_lines">light_lines</option>
-                                <option value="backlight">backlight</option>
-                            </optgroup>
-                        </select>
-                    </th>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <th>
-                        <label for="manufacturer"><input type="text" id="manufacturer" name="manufacturer" placeholder="Производитель"></label>
-                    </th>
-                    <th>
-                        <label for="product"><input type="text" id="product" name="product" placeholder="Продукт"></label>
-                    </th>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <th>
-                        <label for="quantity"><input type="text" pattern="[0-9.]*" id="quantity" name="quantity" placeholder="Количество"></label>
-                    </th>
-                    <th>
-                        <label for="price"><input type="text" pattern="[0-9.]*" id="price" name="price" placeholder="Цена"></label>
-                    </th>
-                </tr>
-            </table>
-<!--            <button type="submit" name="button" style="margin-top: 10px;">Enter</button>-->
-            <input type="submit" name="button" value="Enter" style="margin-top: 10px;">
-        </form>
-        <form action="#" th:action="@{/createEstimate/deleteById}" method="post">
-<!--            <button type="submit" style="margin-top: 10px;">DeleteById</button>-->
-            <input type="submit" name="button" value="DeleteById" style="margin-top: 10px;">
-            <input type="text" name="delId" id="delId" placeholder="Enter number of string" pattern="[0-9]*">
-        </form>
-        <form action="#" th:action="@{/createEstimate/deleteAll}" method="post">
-<!--            <button type="submit" style="margin-top: 10px;">DeleteAll</button>-->
-            <input type="submit" name="button" value="DeleteAll" style="margin-top: 10px;">
-        </form>
-    </div>
-    <h3 style="text-align: center">Сметы ремонта:</h3>
-    <table id="desc">
-        <tr>
-            <th>Код</th>
-            <th>Помещение</th>
-            <th>Категория</th>
-            <th>Описание</th>
-            <th>Производитель</th>
-            <th>Продукт</th>
-            <th>Количество</th>
-            <th>Цена</th>
-            <th>Общая стоимость</th>
-        </tr>
-        <tr th:each="estimate: ${estimates}">
-            <td th:text="${estimate.id}"></td>
-            <td th:text="${estimate.room}"></td>
-            <td th:text="${estimate.category}"></td>
-            <td th:text="${estimate.description}"></td>
-            <td th:text="${estimate.manufacturer}"></td>
-            <td th:text="${estimate.product}"></td>
-            <td th:text="${estimate.quantity}"></td>
-            <td th:text="${estimate.price}"></td>
-            <td th:text="${estimate.sum}"></td>
-        </tr>
-    </table>
+    <form action="#" th:action="@{/createEstimate/deleteById}" method="post">
+        <input type="submit" name="button" value="DeleteById" style="margin-top: 10px;">
+        <input type="text" name="delId" id="delId" placeholder="Enter number of string" pattern="[0-9]*">
+    </form>
+    <form action="#" th:action="@{/createEstimate/deleteAll}" method="post">
+        <input type="submit" name="button" value="DeleteAll" style="margin-top: 10px;">
+    </form>
+</div>
+<h3 style="text-align: center">Сметы ремонта:</h3>
+<table id="desc">
+    <tr>
+        <th>Код</th>
+        <th>Помещение</th>
+        <th>Категория</th>
+        <th>Описание</th>
+        <th>Производитель</th>
+        <th>Продукт</th>
+        <th>Количество</th>
+        <th>Цена</th>
+        <th>Общая стоимость</th>
+    </tr>
+    <tr th:each="estimate: ${estimates}">
+        <td th:text="${estimate.id}"></td>
+        <td th:text="${estimate.room}"></td>
+        <td th:text="${estimate.category}"></td>
+        <td th:text="${estimate.description}"></td>
+        <td th:text="${estimate.manufacturer}"></td>
+        <td th:text="${estimate.product}"></td>
+        <td th:text="${estimate.quantity}"></td>
+        <td th:text="${estimate.price}"></td>
+        <td th:text="${estimate.sum}"></td>
+    </tr>
+</table>
 </body>
 </html>

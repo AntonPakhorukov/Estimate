@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -53,5 +54,13 @@ public class User {
         this.active = active;
         this.phone = phone;
         this.address = address;
+    }
+    private List<Estimate> getTotal(List<Estimate> baseListEstimate){
+        List<Estimate> listRoom = new ArrayList<>();
+        for (Estimate estimate : baseListEstimate) {
+//            if()
+        }
+
+        return null;
     }
 }

@@ -13,7 +13,10 @@ import spring.min.work.repository.MessageRepository;
 import spring.min.work.repository.UserRepository;
 import spring.min.work.service.EstimateService;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
@@ -37,8 +40,11 @@ public class MainController {
         return "main";
     }
 
+
     @GetMapping("/mainPage")
-    public String mainPage() {
+    public String mainPage(Model model, Principal principal) {
+        model.addAttribute("estimates",
+                userRepository.findByUsername(principal.getName()).getEstimates());
         return "mainPage";
     }
 
@@ -54,14 +60,16 @@ public class MainController {
     }
 
     @GetMapping("/details")
-    public String details(Model model) {
-        model.addAttribute("estimates", estimateService.getAll());
+    public String details(Model model, Principal principal) {
+        model.addAttribute("estimates",
+                userRepository.findByUsername(principal.getName()).getEstimates());
         return "details";
     }
 
     @GetMapping("/createEstimate")
-    public String createEstimate(Model model) {
-        model.addAttribute("estimates", estimateService.getAll());
+    public String createEstimate(Model model, Principal principal) {
+        model.addAttribute("estimates",
+                userRepository.findByUsername(principal.getName()).getEstimates());
         return "createEstimate";
     }
 
@@ -70,9 +78,8 @@ public class MainController {
                               @RequestParam String description, @RequestParam String manufacturer,
                               @RequestParam String product, @RequestParam String quantity,
                               @RequestParam String price, @RequestParam("button") String buttonValues,
-                              Model model/*, User user*/) {
+                              Model model, Principal principal) {
         if ("Enter".equals(buttonValues)) {
-            System.err.println(buttonValues + " = add button");
             if (quantity.equals("") && !price.equals("")) {
                 quantity = "1";
             } else if (quantity.equals("") && price.equals("")) {
@@ -84,31 +91,44 @@ public class MainController {
             Estimate estimate = new Estimate(room, category, description,
                     manufacturer, product, quantity, price);
             estimateService.createEstimate(estimate);
-            List<Estimate> estimates = estimateService.getAll();
-            model.addAttribute("estimates", estimates);
+            System.err.println("введены: " + estimate);
+            if (userRepository.findByUsername(principal.getName()).getEstimates() == null) {
+                userRepository.findByUsername(principal.getName()).setEstimates(new ArrayList<>());
+            }
+            userRepository.findByUsername(principal.getName()).getEstimates().add(estimate);
+            userRepository.save(userRepository.findByUsername(principal.getName()));
+            model.addAttribute("estimates",
+                    userRepository.findByUsername(principal.getName()).getEstimates());
             return "createEstimate";
         } else {
-            System.err.println("check enter button " + buttonValues);
-            model.addAttribute("estimates", estimateService.getAll());
+            model.addAttribute("estimates",
+                    userRepository.findByUsername(principal.getName()).getEstimates());
             return "redirect:/mainPage";
         }
     }
 
     @PostMapping("/createEstimate/deleteById")
-    public String deleteById(@RequestParam String delId, Model model) {
+    public String deleteById(@RequestParam String delId, Model model, Principal principal) {
         if (delId != null && !delId.equals("")) {
             estimateService.deleteEstimateById(Integer.parseInt(delId));
-            model.addAttribute("estimates", estimateService.getAll());
+            model.addAttribute("estimates",
+                    userRepository.findByUsername(principal.getName()).getEstimates());
             return "createEstimate";
         }
-        model.addAttribute("estimates", estimateService.getAll());
+        model.addAttribute("estimates",
+                userRepository.findByUsername(principal.getName()).getEstimates());
         return "createEstimate";
     }
 
     @PostMapping("/createEstimate/deleteAll")
-    public String deleteAllEstimate(Model model) {
+    public String deleteAllEstimate(Model model, Principal principal) {
         estimateRepository.deleteAll();
-        model.addAttribute("estimates", estimateService.getAll());
+        model.addAttribute("estimates",
+                userRepository.findByUsername(principal.getName()).getEstimates());
+        System.err.println("auth: " + principal.getName());
+        System.err.println(userRepository.findByUsername(principal.getName())
+                .getEstimates().stream().map(estimate -> estimate.getManufacturer()).collect(Collectors.toList()));
+        System.err.println(userRepository.findByUsername(principal.getName()).getEstimates());
         return "createEstimate";
     }
 
@@ -147,7 +167,6 @@ public class MainController {
         } else {
             messages = messageRepository.findAll();
             path = "redirect:/main";
-
         }
         model.addAttribute("messages", messages);
         return path;
