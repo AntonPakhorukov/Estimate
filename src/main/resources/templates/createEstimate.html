@@ -35,13 +35,15 @@
 </head>
 <body>
     <div style="text-align:left">
-    <form th:action="@{/mainPage}" method="get" style="text-align:left">
-        <input type="submit" name="button" value="Back"/>
+<!--    <form th:action="@{/mainPage}" method="get" style="text-align:left">-->
+    <form th:action="@{/createEstimate}" method="post" style="text-align:left">
+<!--        <input type="submit" name="button" value="Back"/>-->
         <!--        <input type="submit" name="button" value="UserList">-->
     </form>
     </div>
     <div>
         <form method="post" th:action="@{/createEstimate}">
+            <input type="submit" name="button" value="Back"/>
             <table id="select">
                 <tr>
                     <th>
@@ -129,14 +131,17 @@
                     </th>
                 </tr>
             </table>
-            <button type="submit" name="button" style="margin-top: 10px;">Enter</button>
+<!--            <button type="submit" name="button" style="margin-top: 10px;">Enter</button>-->
+            <input type="submit" name="button" value="Enter" style="margin-top: 10px;">
         </form>
         <form action="#" th:action="@{/createEstimate/deleteById}" method="post">
-            <button type="submit" style="margin-top: 10px;">DeleteById</button>
+<!--            <button type="submit" style="margin-top: 10px;">DeleteById</button>-->
+            <input type="submit" name="button" value="DeleteById" style="margin-top: 10px;">
             <input type="text" name="delId" id="delId" placeholder="Enter number of string" pattern="[0-9]*">
         </form>
         <form action="#" th:action="@{/createEstimate/deleteAll}" method="post">
-            <button type="submit" style="margin-top: 10px;">DeleteAll</button>
+<!--            <button type="submit" style="margin-top: 10px;">DeleteAll</button>-->
+            <input type="submit" name="button" value="DeleteAll" style="margin-top: 10px;">
         </form>
     </div>
     <h3 style="text-align: center">Сметы ремонта:</h3>

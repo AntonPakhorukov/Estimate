@@ -37,7 +37,13 @@
         <th>Помещение</th>
         <th>Категория</th>
         <th>Описание</th>
-        <th>Сумма</th>
+        <th>Общая стоимость сметы</th>
+    </tr>
+    <tr th:each="estimate: ${estimates}">
+        <td th:text="${estimate.room}"></td>
+        <td th:text="${estimate.room}"></td>
+        <td th:text="${estimate.room}"></td>
+        <td th:text="${estimate.room}"></td>
     </tr>
 </table>
 
