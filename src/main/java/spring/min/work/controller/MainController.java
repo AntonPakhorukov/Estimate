@@ -92,9 +92,6 @@ public class MainController {
                     manufacturer, product, quantity, price);
             estimateService.createEstimate(estimate);
             System.err.println("введены: " + estimate);
-            if (userRepository.findByUsername(principal.getName()).getEstimates() == null) {
-                userRepository.findByUsername(principal.getName()).setEstimates(new ArrayList<>());
-            }
             userRepository.findByUsername(principal.getName()).getEstimates().add(estimate);
             userRepository.save(userRepository.findByUsername(principal.getName()));
             model.addAttribute("estimates",

@@ -54,6 +54,7 @@ public class User {
         this.active = active;
         this.phone = phone;
         this.address = address;
+        this.estimates = new ArrayList<>();
     }
     private List<Estimate> getTotal(List<Estimate> baseListEstimate){
         List<Estimate> listRoom = new ArrayList<>();
