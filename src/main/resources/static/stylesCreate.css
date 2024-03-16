@@ -1,6 +1,9 @@
-.input {
-
-    display:block;
-    margin: 15px 0 15px 20px;
+body {
+    background-color: #FFF8DC;
 }
+
+.input-element{
+            font-size: 100px; // for say a select
+            width: 600px;
+        }
 

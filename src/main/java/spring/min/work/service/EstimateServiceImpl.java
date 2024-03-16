@@ -10,6 +10,7 @@ import java.util.List;
 @Service
 public class EstimateServiceImpl implements EstimateService {
     private final EstimateRepository estimateRepository;
+
     @Autowired
     public EstimateServiceImpl(EstimateRepository estimateRepository) {
         this.estimateRepository = estimateRepository;
@@ -23,7 +24,7 @@ public class EstimateServiceImpl implements EstimateService {
     @Override
     public Estimate getEstimateById(Integer id) {
         return estimateRepository.findById(Long.valueOf(id))
-                .orElseThrow(()-> new RuntimeException("Estimate not found"));
+                .orElseThrow(() -> new RuntimeException("Estimate not found"));
     }
 
     @Override

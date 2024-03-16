@@ -6,9 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import spring.min.work.domain.Estimate;
 import spring.min.work.domain.Message;
+import spring.min.work.repository.EstimateRepository;
 import spring.min.work.repository.MessageRepository;
 import spring.min.work.repository.UserRepository;
+import spring.min.work.service.EstimateService;
 
 import java.util.List;
 
@@ -19,6 +22,10 @@ public class MainController {
     private UserRepository userRepository;
     @Autowired
     private MessageRepository messageRepository;
+    @Autowired
+    private EstimateService estimateService;
+    @Autowired
+    private EstimateRepository estimateRepository;
 
     @GetMapping({"", "/"})
     public String first(Model model) {
@@ -48,16 +55,66 @@ public class MainController {
         }
     }
     @GetMapping("/details")
-    public String details(){
+    public String details(Model model){
+        model.addAttribute("estimates", estimateService.getAll());
         return "details";
     }
     @GetMapping("/createEstimate")
-    public String createEstimate(){
+    public String createEstimate(Model model){
+        model.addAttribute("estimates", estimateService.getAll());
         return "createEstimate";
     }
-    @PostMapping("/createEstimate")
-    public String backToMainPageFromCreateEstimate(){
-        return "redirect:/mainPage";
+
+
+//    @GetMapping("/createEstimate")
+//    public String back(Model model){
+//        model.addAttribute("estimates", estimateService.getAll());
+//        return "redirect:/mainPage";
+//    }
+
+@PostMapping("/createEstimate")
+    public String addEstimate(@RequestParam String room,
+                              @RequestParam String category,
+                              @RequestParam String description,
+                              @RequestParam String manufacturer,
+                              @RequestParam String product,
+                              @RequestParam String quantity,
+                              @RequestParam String price,
+                              Model model/*, User user*/) {
+        if (quantity.equals("") && !price.equals("")) {
+            quantity = "1";
+        } else if (quantity.equals("") && price.equals("")){
+            quantity = "1";
+            price = "1";
+            manufacturer = "test";
+            product = "test";
+        }
+        Estimate estimate = new Estimate(room, category, description,
+                manufacturer, product, quantity, price);
+        System.out.println(estimate);
+        estimateService.createEstimate(estimate);
+        List<Estimate> estimates = estimateService.getAll();
+        System.out.println("list to html:");
+        estimates.stream().forEach(System.out::println);
+        model.addAttribute("estimates", estimates);
+        return "createEstimate";
+    }
+
+    @PostMapping("/createEstimate/deleteById")
+    public String deleteById(@RequestParam String delId, Model model){
+        if (delId != null && !delId.equals("")){
+            estimateService.deleteEstimateById(Integer.parseInt(delId));
+            model.addAttribute("estimates", estimateService.getAll());
+            return "createEstimate";
+        }
+        model.addAttribute("estimates", estimateService.getAll());
+        return "createEstimate";
+    }
+    @PostMapping("/createEstimate/deleteAll")
+    public String deleteAllEstimate(Model model){
+        estimateRepository.deleteAll();
+        model.addAttribute("estimates", estimateService.getAll());
+        return "createEstimate";
     }
 
     @PostMapping("/details")
