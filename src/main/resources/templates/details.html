@@ -1,21 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
-      xmlns:text-align="http://www.w3.org/1999/xhtml">
+>
 <head>
+    <link rel="stylesheet" href="/page.css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Details</title>
     <style>
-        table {
+        #desc {
             border-collapse: collapse;
             width: 90%;
             border-spacing: 10px;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 20 px;
+            th {
             text-align: center;
+            background: #FFD700;
+            min-width: 30px;
+            white-space: nowrap;
+            }
+            td {
+            background: #FFFACD;
+            text-align: left;
+            }
+            th, td {
+            border: 1px solid black;
+            padding-left: 5px;
+            padding-right: 5px;
+
             margin: 10px
+            }
+        }
+        label {
+            margin-top: 10px;
+            display: block;
+        #edit {
+            th {
+                min-width: 30px;
+            }
         }
     </style>
 </head>
@@ -27,7 +46,7 @@
     </form>
 </div>
 <h3 style="text-align: center">Детализация ремонта:</h3>
-<table>
+<table id="desc">
     <tr>
         <th>Помещение</th>
         <th>Категория</th>
@@ -37,6 +56,16 @@
         <th>Количество</th>
         <th>Цена</th>
         <th>Сумма</th>
+    </tr>
+    <tr th:each="estimate: ${estimates}">
+        <td th:text="${estimate.room}"></td>
+        <td th:text="${estimate.category}"></td>
+        <td th:text="${estimate.description}"></td>
+        <td th:text="${estimate.manufacturer}"></td>
+        <td th:text="${estimate.product}"></td>
+        <td th:text="${estimate.quantity}"></td>
+        <td th:text="${estimate.price}"></td>
+        <td th:text="${estimate.sum}"></td>
     </tr>
 </table>
 </body>

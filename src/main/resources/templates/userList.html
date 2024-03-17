@@ -1,26 +1,70 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:min-width="http://www.w3.org/1999/xhtml"
+      xmlns:margin="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>UserList</title>
+    <link rel="stylesheet" href="/page.css">
+<!--    <link rel="stylesheet" href="/table.css">-->
+    <style>
+        #wTh {
+            width: 30px;
+        }
+        #desc {
+            border-collapse: collapse;
+            width: 90%;
+            border-spacing: 10px;
+            th {
+            border: 1px solid black;
+            text-align: center;
+            background: #FFD700;
+            min-width: 30px;
+            white-space: nowrap;
+            padding-left: 5px;
+            padding-right: 5px;
+            margin: 10px
+            }
+            td {
+            border: 1px solid black;
+            background: #FFFACD;
+            text-align: left;
+            padding-left: 5px;
+            padding-right: 5px;
+            margin: 10px
+            }
+        }
+        label {
+<!--            margin-top: 10px;-->
+            display: block;
+        #edit {
+            th {
+                min-width: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h3>User list</h3>
-    <table>
-        <thead>
+    <h3>Client list</h3>
+    <form th:action="@{/user}" method="post" style="text-align:left; margin: 5px 5px 5px 0;">
+        <input type="submit" name="button" value="Back">
+    </form>
+    <table id="desc">
         <tr> <!-- Создание заголовочной строки, указываем ее значение-->
-            <th>ID</th>
+            <th id="wTh">ID</th>
             <th>Name</th>
+            <th>Phone</th>
             <th>Email</th>
+            <th>Address</th>
             <th>Active</th>
-            <th>Role</th>
+            <th>Edit client</th>
         </tr>
-        </thead>
         <tbody>
         <tr th:each="user: ${users}" th:object="${selectedRoles}">
-            <td th:text="${user.id}"></td>
+            <td style="text-align: center" th:text="${user.id}"></td>
             <td th:text="${user.username}"></td>
+            <td th:text="${user.phone}"></td>
             <td th:text="${user.email}"></td>
+            <td th:text="${user.address}"></td>
             <td th:text="${user.active}"></td>
 <!--            <li th:text="${user.role}"></li>-->
 <!--                <td th:for="${role}" th:text="${role}">Role</td>-->

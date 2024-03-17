@@ -3,22 +3,34 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       xmlns:text-align="http://www.w3.org/1999/xhtml">
 <head>
-    <link rel="stylesheet" href="/stylesMainPage.css">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Main Page</title>
+    <link rel="stylesheet" href="/page.css">
     <style>
         table {
             border-collapse: collapse;
             width: 50%;
             border-spacing: 10px;
         }
-        th, td {
+        th {
             border: 1px solid black;
-            padding: 20 px;
+            padding-left: 5px;
+            padding-right: 5px;
             text-align: center;
-            margin: 10px
+            margin: 10px;
+            background: #FFD700;
+            min-width: 50px;
+            white-space: nowrap;
+        }
+        td {
+            background: #FFFACD;
+            border: 1px solid black;
+            padding-left: 5px;
+            padding-right: 5px;
+            text-align: left;
+            margin: 10px;
         }
     </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Main Page</title>
 </head>
 <body>
 <div th:inline="text" style="text-align:left" >Auth: <span th:remove="tag" sec:authentication="name"></span>
@@ -37,14 +49,12 @@
     <tr>
         <th>Помещение</th>
         <th>Категория</th>
-        <th>Описание</th>
         <th>Общая стоимость сметы</th>
     </tr>
     <tr th:each="estimate: ${estimates}">
         <td th:text="${estimate.room}"></td>
         <td th:text="${estimate.category}"></td>
-        <td th:text="${estimate.description}"></td>
-        <td th:text="${estimate.sum}"></td>
+        <td style="text-align: center" th:text="${estimate.sum}"></td>
     </tr>
 </table>
 

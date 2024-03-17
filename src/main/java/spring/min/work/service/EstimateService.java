@@ -9,4 +9,5 @@ public interface EstimateService {
     Estimate getEstimateById(Integer id);
     List<Estimate> getAll();
     void deleteEstimateById(Integer id);
+    List<Estimate> getTotal(List<Estimate> allEstimate);
 }

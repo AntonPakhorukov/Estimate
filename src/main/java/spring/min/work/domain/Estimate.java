@@ -26,6 +26,12 @@ public class Estimate {
     @JoinColumn(name = "usr_id")
     private User user;
 
+    public Estimate(String room, String category, String sum) {
+        this.room = room;
+        this.category = category;
+        this.sum = sum;
+    }
+
     public Estimate(String room, String category, String description, String manufacturer,
                     String product, String quantity, String price) {
         this.room = room;
@@ -45,5 +51,6 @@ public class Estimate {
         }
         this.sum = String.valueOf(Integer.parseInt(quantity) * Double.parseDouble(price));
 //        this.user = user;
+
     }
 }

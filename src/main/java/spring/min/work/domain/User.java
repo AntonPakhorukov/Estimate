@@ -34,8 +34,6 @@ public class User {
     // Это позволяет создать табличку user-role, которая будет соединяться с текущей табличкой через user_id
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
-//    @OneToOne(cascade = CascadeType.REMOVE)
-//    private Bucket bucket;
     private String phone;
     private String address;
     @OneToMany
@@ -55,13 +53,5 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.estimates = new ArrayList<>();
-    }
-    private List<Estimate> getTotal(List<Estimate> baseListEstimate){
-        List<Estimate> listRoom = new ArrayList<>();
-        for (Estimate estimate : baseListEstimate) {
-//            if()
-        }
-
-        return null;
     }
 }
