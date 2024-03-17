@@ -46,6 +46,10 @@
 <body>
     <h3>Client list</h3>
     <form th:action="@{/user}" method="post" style="text-align:left; margin: 5px 5px 5px 0;">
+        <input type="hidden" name="username" id="username">
+        <input type="hidden" name="phone" placeholder="phone" /><br>
+        <input type="hidden" name="email" placeholder="email"><br>
+        <input type="hidden" name="address" placeholder="address"><br>
         <input type="submit" name="button" value="Back">
     </form>
     <table id="desc">

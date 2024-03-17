@@ -8,6 +8,8 @@ import spring.min.work.domain.Role;
 import spring.min.work.domain.User;
 import spring.min.work.repository.UserRepository;
 
+import java.security.Principal;
+
 @Controller
 public class UserController {
     @Autowired
@@ -26,19 +28,18 @@ public class UserController {
     }
     @PostMapping("/user/{user}")
     public String userSave(
-            @RequestParam("userId") User user,
-            @RequestParam String username,
-            @RequestParam String password
-    ) {
-
-        user.setUsername(username);
-        user.setPassword(password);
-        userRepository.save(user);
+            @RequestParam("userId") User user, @RequestParam String username) {
         return "redirect:/user";
     }
 
-    @PostMapping("/user")
-    public String backToFirstPage(){
+    @PostMapping("/user") // button save
+    public String backToFirstPage(Principal principal, @RequestParam String email,
+                                  @RequestParam String address, @RequestParam String phone){
+        User user = userRepository.findByUsername(principal.getName());
+        user.setEmail(email);
+        user.setPhone(phone);
+        user.setAddress(address);
+        userRepository.save(user);
         return "redirect:/";
     }
 }

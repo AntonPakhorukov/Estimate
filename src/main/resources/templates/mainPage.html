@@ -35,7 +35,7 @@
 <body>
 <div th:inline="text" style="text-align:left" >Auth: <span th:remove="tag" sec:authentication="name"></span>
 <form th:action="@{/mainPage}" method="post" style="text-align:left">
-    <input type="hidden" name="username" id="username" >
+    <input type="hidden" name="username" id="username">
     <input type="submit" name="button" value="Logout"/>
     <h3>Главная страница.</h3>
     <input type="submit" name="button" value="Details">

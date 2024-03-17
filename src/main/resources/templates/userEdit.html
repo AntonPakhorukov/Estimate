@@ -1,21 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Edit User</title>
     <link rel="stylesheet" href="/page.css">
 </head>
 <body>
-    <h3>Edit user</h3>
+    <h3>Edit user: "<span th:remove="tag" sec:authentication="name"></span>"</h3>
     <form action="/user" method="post" th:object="${selectedRoles}">
-        <input type="text" name="username" value="${session.user.username}" /><br>
+        <!--        <input type="text" name="username" placeholder="username" /><br>-->
+        <!--        <div style="margin: 5px 0 5px 20px; display:block;"></div>-->
+        <input type="hidden" name="username" id="username">
+        <input type="text" name="phone" placeholder="phone" /><br>
         <div style="margin: 5px 0 5px 20px; display:block;"></div>
-        <input type="text" placeholder="set password" name="password"><br>
-        <input type="text" value="${user.id}" readonly /><br>
+        <input type="text" name="email" placeholder="email"><br>
+        <div style="margin: 5px 0 5px 20px; display:block;"></div>
+        <input type="text" name="address" placeholder="address"><br>
+        <!--        <input type="text" value="${user.id}" readonly /><br>-->
 <!--        <tr th:each="role: ${roles}">-->
 <!--            <input type="checkbox" th:id="role" th:name="selectedRoles" th:value="${role}"/>-->
 <!--            <label th:for="${role}" th:text="${role}">Role</label><br>-->
         </tr>
+        <div style="margin: 5px 0 5px 20px; display:block;"></div>
         <button type="submit">Save</button>
     </form>
 </body>

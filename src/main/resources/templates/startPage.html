@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" href="/page.css">
     <title>Start page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-<h1>Welcome!</h1>
+<h1>Welcome, <span th:remove="tag" sec:authentication="name"></span>!</h1>
 
 <p>Click <a th:href="@{/user}">here</a> to go list client =></p>
 <p>Click <a th:href="@{/mainPage}">here</a> to go calculate project =></p>
