@@ -71,10 +71,6 @@
         <td th:text="${user.active}"></td>
         <td><a th:href="@{'/user/' + ${user.id}}">Edit</a></td>
     </tr>
-    <tr th:each="role: ${roles}">
-        <input type="text" th:id="role" th:name="selectedRoles" th:value="${role}"/>
-        <label th:for="${role}" th:text="${role}">Role</label>
-    </tr>
     </tbody>
 </table>
 </body>

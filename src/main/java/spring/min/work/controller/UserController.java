@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import spring.min.work.domain.Role;
 import spring.min.work.domain.User;
 import spring.min.work.repository.UserRepository;
 
@@ -31,23 +30,29 @@ public class UserController {
     @GetMapping("/user/{user}")
     public String userEditForm(@PathVariable(name = "user") User user, Model model) {
         model.addAttribute("user", user.getId());
-        model.addAttribute("roles", Role.values());
         return "userEdit";
     }
 
     @PostMapping("/user/{user}")
-    public String userSave(@RequestParam("userId") User user, @RequestParam String username) {
+    public String userSave(@RequestParam("userId") User user, @RequestParam String username,
+                           @RequestParam String email, @RequestParam String address,
+                           @RequestParam String phone, Principal principal, Model model) {
+        userRepository.findByUsername(principal.getName()).setAddress(address);
+        userRepository.findByUsername(principal.getName()).setPhone(phone);
+        userRepository.findByUsername(principal.getName()).setEmail(email);
+        userRepository.save(userRepository.findByUsername(principal.getName()));
+        model.addAttribute("users", userRepository.findAll());
         return "redirect:/user";
     }
 
     @PostMapping("/user")
-    public String backToFirstPage(Principal principal, @RequestParam String email,
+    public String backToFirstPage(Principal principal, @RequestParam String email, Model model,
                                   @RequestParam String address, @RequestParam String phone) {
-        User user = userRepository.findByUsername(principal.getName());
-        user.setEmail(email);
-        user.setPhone(phone);
-        user.setAddress(address);
-        userRepository.save(user);
+        userRepository.findByUsername(principal.getName()).setAddress(address);
+        userRepository.findByUsername(principal.getName()).setPhone(phone);
+        userRepository.findByUsername(principal.getName()).setEmail(email);
+        userRepository.save(userRepository.findByUsername(principal.getName()));
+        model.addAttribute("users", userRepository.findAll());
         return "redirect:/";
     }
 }

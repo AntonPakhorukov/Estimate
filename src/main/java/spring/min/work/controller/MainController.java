@@ -85,6 +85,7 @@ public class MainController {
             estimateService.createEstimate(estimate);
             userRepository.findByUsername(principal.getName()).getEstimates().add(estimate);
             userRepository.save(userRepository.findByUsername(principal.getName()));
+
             model.addAttribute("estimates", userRepository
                     .findByUsername(principal.getName()).getEstimates());
             return "createEstimate";

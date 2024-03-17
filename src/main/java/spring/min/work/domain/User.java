@@ -1,6 +1,5 @@
 package spring.min.work.domain;
 
-
 import jakarta.persistence.*;
 import jdk.jfr.BooleanFlag;
 import lombok.AllArgsConstructor;
@@ -10,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -27,24 +25,15 @@ public class User {
     private String email;
     @BooleanFlag
     private boolean active;
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    // EAGER - всегда будет подгружена роль, LAZY - только при обращении
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
-    // Говорит что данное поле будет храниться в отдельной таблице, для которой мы не описывали mapping.
-    // Это позволяет создать табличку user-role, которая будет соединяться с текущей табличкой через user_id
-    @Enumerated(EnumType.STRING)
-    private Set<Role> roles;
     private String phone;
     private String address;
     @OneToMany
     @JoinColumn(name = "estimate_id")
     private List<Estimate> estimates;
-
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
-
     public User(String username, String email, String password, boolean active, String phone, String address) {
         this.username = username;
         this.email = email;

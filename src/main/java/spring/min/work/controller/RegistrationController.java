@@ -6,11 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import spring.min.work.domain.Role;
 import spring.min.work.domain.User;
 import spring.min.work.repository.UserRepository;
-
-import java.util.Collections;
 
 @Controller
 public class RegistrationController {
@@ -35,7 +32,6 @@ public class RegistrationController {
                 return "registration";
             }
             user.setActive(true);
-            user.setRoles(Collections.singleton(Role.CLIENT));
             userRepository.save(user);
             return "redirect:/login";
         } else {
