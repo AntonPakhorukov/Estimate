@@ -40,9 +40,13 @@ public class EstimateServiceImpl implements EstimateService {
                 .toMap(estimate -> estimate.getRoom() + " " + estimate.getCategory(),
                         estimate -> estimate, (existing, toAdd) ->
                                 new Estimate(existing.getRoom(), existing.getCategory(),
-                                        String.valueOf(Double.valueOf(existing.getSum()) + Double.valueOf(toAdd.getSum())))));
+                                        String.valueOf(Double.valueOf(existing.getSum())
+                                                + Double.valueOf(toAdd.getSum())))));
         List<Estimate> result = getEstimate.values().stream()
                 .sorted(Comparator.comparing(Estimate::getRoom)).collect(Collectors.toList());
         return result;
+    }
+    public void deleteAll(){
+        estimateRepository.deleteAll();
     }
 }

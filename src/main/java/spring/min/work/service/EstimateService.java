@@ -14,4 +14,6 @@ public interface EstimateService {
     void deleteEstimateById(Integer id);
 
     List<Estimate> getTotal(List<Estimate> allEstimate);
+
+    void deleteAll();
 }

@@ -12,6 +12,7 @@ import spring.min.work.repository.UserRepository;
 @Controller
 public class RegistrationController {
     private final UserRepository userRepository;
+
     @Autowired
     public RegistrationController(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -23,8 +24,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(@RequestParam("button") String buttonValue,
-                          User user, Model model) {
+    public String addUser(@RequestParam("button") String buttonValue, User user, Model model) {
         if ("Registering".equals(buttonValue)) {
             User userFromDb = userRepository.findByUsername(user.getUsername());
             if (userFromDb != null) {

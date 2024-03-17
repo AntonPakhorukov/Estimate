@@ -22,7 +22,7 @@ public class Estimate {
     private String quantity;
     private String price;
     private String sum;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "usr_id")
     private User user;
 

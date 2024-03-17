@@ -30,10 +30,12 @@ public class User {
     @OneToMany
     @JoinColumn(name = "estimate_id")
     private List<Estimate> estimates;
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
+
     public User(String username, String email, String password, boolean active, String phone, String address) {
         this.username = username;
         this.email = email;

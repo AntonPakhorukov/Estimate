@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 public class WebSecurityConfig {
     @Autowired
     private DataSource dataSource;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
