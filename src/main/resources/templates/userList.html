@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:min-width="http://www.w3.org/1999/xhtml"
-      xmlns:margin="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+>
 <head>
     <meta charset="UTF-8">
     <title>UserList</title>
     <link rel="stylesheet" href="/page.css">
-<!--    <link rel="stylesheet" href="/table.css">-->
     <style>
         #wTh {
             width: 30px;
@@ -34,51 +33,49 @@
             }
         }
         label {
-<!--            margin-top: 10px;-->
             display: block;
         #edit {
             th {
                 min-width: 30px;
             }
         }
+
     </style>
 </head>
 <body>
-    <h3>Client list</h3>
-    <form th:action="@{/user}" method="post" style="text-align:left; margin: 5px 5px 5px 0;">
-        <input type="hidden" name="username" id="username">
-        <input type="hidden" name="phone" placeholder="phone" /><br>
-        <input type="hidden" name="email" placeholder="email"><br>
-        <input type="hidden" name="address" placeholder="address"><br>
-        <input type="submit" name="button" value="Back">
-    </form>
-    <table id="desc">
-        <tr> <!-- Создание заголовочной строки, указываем ее значение-->
-            <th id="wTh">ID</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>Active</th>
-            <th>Edit client</th>
-        </tr>
-        <tbody>
-        <tr th:each="user: ${users}" th:object="${selectedRoles}">
-            <td style="text-align: center" th:text="${user.id}"></td>
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.phone}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.address}"></td>
-            <td th:text="${user.active}"></td>
-<!--            <li th:text="${user.role}"></li>-->
-<!--                <td th:for="${role}" th:text="${role}">Role</td>-->
-            <td><a th:href="@{'/user/' + ${user.id}}">Edit</a></td>
-        </tr>
-        <tr th:each="role: ${roles}">
-            <input type="text" th:id="role" th:name="selectedRoles" th:value="${role}"/>
-            <label th:for="${role}" th:text="${role}">Role</label>
-        </tr>
-        </tbody>
-    </table>
+<h3>Client list</h3>
+<form th:action="@{/user}" method="post" style="text-align:left; margin: 5px 5px 5px 0;">
+    <input type="hidden" name="username" id="username">
+    <input type="hidden" name="phone" placeholder="phone"/><br>
+    <input type="hidden" name="email" placeholder="email"><br>
+    <input type="hidden" name="address" placeholder="address"><br>
+    <input type="submit" name="button" value="Back">
+</form>
+<table id="desc">
+    <tr>
+        <th id="wTh">ID</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Active</th>
+        <th>Edit client</th>
+    </tr>
+    <tbody>
+    <tr th:each="user: ${users}" th:object="${selectedRoles}">
+        <td style="text-align: center" th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.phone}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.address}"></td>
+        <td th:text="${user.active}"></td>
+        <td><a th:href="@{'/user/' + ${user.id}}">Edit</a></td>
+    </tr>
+    <tr th:each="role: ${roles}">
+        <input type="text" th:id="role" th:name="selectedRoles" th:value="${role}"/>
+        <label th:for="${role}" th:text="${role}">Role</label>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

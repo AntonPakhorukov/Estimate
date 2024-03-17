@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
-      xmlns:text-align="http://www.w3.org/1999/xhtml">
+>
 <head>
     <link rel="stylesheet" href="/page.css">
     <style>
@@ -28,22 +28,22 @@
             text-align: left;
             margin: 10px;
         }
+
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Main Page</title>
 </head>
 <body>
-<div th:inline="text" style="text-align:left" >Auth: <span th:remove="tag" sec:authentication="name"></span>
-<form th:action="@{/mainPage}" method="post" style="text-align:left">
-    <input type="hidden" name="username" id="username">
-    <input type="submit" name="button" value="Logout"/>
-    <h3>Главная страница.</h3>
-    <input type="submit" name="button" value="Details">
-    <input type="submit" name="button" value="Create Estimate">
-</form>
-<div th:if="${message}" th:text="${message}"></div>
+<div th:inline="text" style="text-align:left">Auth: <span th:remove="tag" sec:authentication="name"></span>
+    <form th:action="@{/mainPage}" method="post" style="text-align:left">
+        <input type="hidden" name="username" id="username">
+        <input type="submit" name="button" value="Logout"/>
+        <h3>Главная страница.</h3>
+        <input type="submit" name="button" value="Details">
+        <input type="submit" name="button" value="Create Estimate">
+    </form>
+    <div th:if="${message}" th:text="${message}"></div>
 </div>
-<!--<h3>Главная страница.</h3>-->
 <h5>Расчет сметы ремонта: общие данные</h5>
 <table id="desc">
     <tr>

@@ -7,39 +7,35 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import spring.min.work.domain.Estimate;
-//import spring.min.work.domain.Message;
 import spring.min.work.repository.EstimateRepository;
-//import spring.min.work.repository.MessageRepository;
 import spring.min.work.repository.UserRepository;
 import spring.min.work.service.EstimateService;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final EstimateService estimateService;
+    private final EstimateRepository estimateRepository;
 
     @Autowired
-    private EstimateService estimateService;
-    @Autowired
-    private EstimateRepository estimateRepository;
+    public MainController(UserRepository userRepository, EstimateService estimateService, EstimateRepository estimateRepository) {
+        this.userRepository = userRepository;
+        this.estimateService = estimateService;
+        this.estimateRepository = estimateRepository;
+    }
 
     @GetMapping({"", "/"})
     public String first() {
         return "startPage";
     }
 
-
     @GetMapping("/mainPage")
     public String mainPage(Model model, Principal principal) {
-        model.addAttribute("estimates",
-//                userRepository.findByUsername(principal.getName()).getEstimates());
-                estimateService.getTotal(userRepository.findByUsername(principal.getName()).getEstimates()));
+        model.addAttribute("estimates", estimateService
+                .getTotal(userRepository.findByUsername(principal.getName()).getEstimates()));
         return "mainPage";
     }
 
@@ -56,16 +52,16 @@ public class MainController {
 
     @GetMapping("/details")
     public String details(Model model, Principal principal) {
-        model.addAttribute("estimates",
-                userRepository.findByUsername(principal.getName()).getEstimates()
-                        .stream().sorted(Comparator.comparing(Estimate::getRoom)));
+        model.addAttribute("estimates", userRepository
+                .findByUsername(principal.getName()).getEstimates()
+                .stream().sorted(Comparator.comparing(Estimate::getRoom)));
         return "details";
     }
 
     @GetMapping("/createEstimate")
     public String createEstimate(Model model, Principal principal) {
-        model.addAttribute("estimates",
-                userRepository.findByUsername(principal.getName()).getEstimates());
+        model.addAttribute("estimates", userRepository
+                .findByUsername(principal.getName()).getEstimates());
         return "createEstimate";
     }
 
@@ -87,15 +83,14 @@ public class MainController {
             Estimate estimate = new Estimate(room, category, description,
                     manufacturer, product, quantity, price);
             estimateService.createEstimate(estimate);
-            System.err.println("введены: " + estimate);
             userRepository.findByUsername(principal.getName()).getEstimates().add(estimate);
             userRepository.save(userRepository.findByUsername(principal.getName()));
-            model.addAttribute("estimates",
-                    userRepository.findByUsername(principal.getName()).getEstimates());
+            model.addAttribute("estimates", userRepository
+                    .findByUsername(principal.getName()).getEstimates());
             return "createEstimate";
         } else {
-            model.addAttribute("estimates",
-                    userRepository.findByUsername(principal.getName()).getEstimates());
+            model.addAttribute("estimates", userRepository
+                    .findByUsername(principal.getName()).getEstimates());
             return "redirect:/mainPage";
         }
     }
@@ -104,24 +99,20 @@ public class MainController {
     public String deleteById(@RequestParam String delId, Model model, Principal principal) {
         if (delId != null && !delId.equals("")) {
             estimateService.deleteEstimateById(Integer.parseInt(delId));
-            model.addAttribute("estimates",
-                    userRepository.findByUsername(principal.getName()).getEstimates());
+            model.addAttribute("estimates", userRepository
+                    .findByUsername(principal.getName()).getEstimates());
             return "createEstimate";
         }
-        model.addAttribute("estimates",
-                userRepository.findByUsername(principal.getName()).getEstimates());
+        model.addAttribute("estimates", userRepository
+                .findByUsername(principal.getName()).getEstimates());
         return "createEstimate";
     }
 
     @PostMapping("/createEstimate/deleteAll")
     public String deleteAllEstimate(Model model, Principal principal) {
         estimateRepository.deleteAll();
-        model.addAttribute("estimates",
-                userRepository.findByUsername(principal.getName()).getEstimates());
-        System.err.println("auth: " + principal.getName());
-        System.err.println(userRepository.findByUsername(principal.getName())
-                .getEstimates().stream().map(estimate -> estimate.getManufacturer()).collect(Collectors.toList()));
-        System.err.println(userRepository.findByUsername(principal.getName()).getEstimates());
+        model.addAttribute("estimates", userRepository
+                .findByUsername(principal.getName()).getEstimates());
         return "createEstimate";
     }
 
@@ -130,38 +121,4 @@ public class MainController {
         model.addAttribute("estimates", estimateService.getAll());
         return "redirect:/mainPage";
     }
-
-//    @PostMapping("/main")
-//    public String addMessage(@RequestParam String text,
-//                             @RequestParam String tag,
-//                             Model model) {
-//        Message message = new Message(text, tag);
-//        messageRepository.save(message);
-//        List<Message> messages = messageRepository.findAll();
-//        model.addAttribute("messages", messages);
-//        return "main";
-//    }
-//
-//    @PostMapping("/main/deleteAll")
-//    public String deleteAll(Model model) {
-//        messageRepository.deleteAll();
-//
-//        model.addAttribute("messages", messageRepository.findAll());
-//        return "redirect:/main";
-//    }
-//
-//    @PostMapping("/main/filter")
-//    public String filter(@RequestParam String filter, Model model) {
-//        String path;
-//        List<Message> messages;
-//        if (filter != null && !filter.isEmpty()) {
-//            messages = messageRepository.findByTag(filter);
-//            path = "main";
-//        } else {
-//            messages = messageRepository.findAll();
-//            path = "redirect:/main";
-//        }
-//        model.addAttribute("messages", messages);
-//        return path;
-//    }
 }

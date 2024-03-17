@@ -50,7 +50,5 @@ public class Estimate {
             this.price = "1";
         }
         this.sum = String.valueOf(Integer.parseInt(quantity) * Double.parseDouble(price));
-//        this.user = user;
-
     }
 }

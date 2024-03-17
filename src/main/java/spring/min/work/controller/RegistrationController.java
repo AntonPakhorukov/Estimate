@@ -14,19 +14,23 @@ import java.util.Collections;
 
 @Controller
 public class RegistrationController {
+    private final UserRepository userRepository;
     @Autowired
-    private UserRepository userRepository;
+    public RegistrationController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @GetMapping("/registration")
-    public String registration(){
+    public String registration() {
         return "registration";
     }
+
     @PostMapping("/registration")
     public String addUser(@RequestParam("button") String buttonValue,
-                          User user, Model model){
-        if("Registering".equals(buttonValue)){
+                          User user, Model model) {
+        if ("Registering".equals(buttonValue)) {
             User userFromDb = userRepository.findByUsername(user.getUsername());
-
-            if(userFromDb != null) {
+            if (userFromDb != null) {
                 model.addAttribute("message", "User exists!");
                 return "registration";
             }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Details</title>
@@ -44,15 +44,12 @@
         label {
             margin-top: 5px;
             display: block;
+
     </style>
     <link rel="stylesheet" href="/page.css">
     <script>src/main/java="script.js" </script>
 </head>
 <body>
-<!--<div style="text-align:left">-->
-<!--    <form th:action="@{/createEstimate}" method="post" style="text-align:left">-->
-<!--    </form>-->
-<!--</div>-->
 <div>
     <form method="post" th:action="@{/createEstimate}">
         <input type="hidden" name="username" id="username">
@@ -167,8 +164,8 @@
         <th>Производитель</th>
         <th>Продукт</th>
         <th id="wTh1">Количество</th>
-        <th id="wTh2" >Цена</th>
-        <th id="wTh3" >Общая стоимость</th>
+        <th id="wTh2">Цена</th>
+        <th id="wTh3">Общая стоимость</th>
     </tr>
     <tr th:each="estimate: ${estimates}">
         <td style="text-align: center" th:text="${estimate.id}"></td>
