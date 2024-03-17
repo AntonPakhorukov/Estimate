@@ -23,6 +23,10 @@ public class test {
         estimate3.setRoom("room1");
         estimate3.setCategory("cat1");
         estimate3.setSum("10");
+        Estimate estimate5 = new Estimate();
+        estimate5.setRoom("room2");
+        estimate5.setCategory("cat1");
+        estimate5.setSum("10");
 
         List<Estimate> list = new ArrayList<>();
 
@@ -30,8 +34,9 @@ public class test {
         list.add(estimate1);
         list.add(estimate2);
         list.add(estimate3);
+        list.add(estimate5);
 
-        list.stream().forEach(System.out::println);
+        list.stream().sorted(Comparator.comparing(Estimate::getRoom)).forEach(System.out::println);
         System.out.println();
         Map<String, Estimate> result = list.stream().collect(Collectors
                 .toMap(estimate -> estimate.getRoom() + " " +estimate.getCategory(),

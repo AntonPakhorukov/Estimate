@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import spring.min.work.domain.Estimate;
 import spring.min.work.repository.EstimateRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -44,7 +42,7 @@ public class EstimateServiceImpl implements EstimateService {
     @Override
     public List<Estimate> getTotal(List<Estimate> allEstimate) {
         Map<String, Estimate> getEstimate = allEstimate.stream().collect(Collectors
-                .toMap(estimate -> estimate.getRoom() + " " +estimate.getCategory(),
+                .toMap(estimate -> estimate.getRoom() + " " + estimate.getCategory(),
                         estimate -> estimate, (existing, toAdd) ->
                                 new Estimate(existing.getRoom(), existing.getCategory(),
                                         String.valueOf(Double.valueOf(existing.getSum()) + Double.valueOf(toAdd.getSum()))) ));

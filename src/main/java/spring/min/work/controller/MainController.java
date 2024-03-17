@@ -15,6 +15,7 @@ import spring.min.work.service.EstimateService;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,7 +57,8 @@ public class MainController {
     @GetMapping("/details")
     public String details(Model model, Principal principal) {
         model.addAttribute("estimates",
-                userRepository.findByUsername(principal.getName()).getEstimates());
+                userRepository.findByUsername(principal.getName()).getEstimates()
+                        .stream().sorted(Comparator.comparing(Estimate::getRoom)));
         return "details";
     }
 
