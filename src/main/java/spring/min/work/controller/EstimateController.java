@@ -95,7 +95,6 @@ public class EstimateController {
 
     @PostMapping("/createEstimate/deleteAll")
     public String deleteAllEstimate(Model model, Principal principal) {
-//        List<Estimate> estimates = estimateService.getAll();
         List<Estimate> toDeleteEstimate = new ArrayList<>();
         for (Estimate estimate : estimateService.getAll()) {
             if(estimate.getUser().getUsername().equals(principal.getName())){
