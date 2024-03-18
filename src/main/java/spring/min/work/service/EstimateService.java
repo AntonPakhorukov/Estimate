@@ -15,5 +15,5 @@ public interface EstimateService {
 
     List<Estimate> getTotal(List<Estimate> allEstimate);
 
-    void deleteAll();
+    void deleteAll(String name);
 }

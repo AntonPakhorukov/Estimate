@@ -46,7 +46,8 @@ public class EstimateServiceImpl implements EstimateService {
                 .sorted(Comparator.comparing(Estimate::getRoom)).collect(Collectors.toList());
         return result;
     }
-    public void deleteAll(){
+    public void deleteAll(String name){
+
         estimateRepository.deleteAll();
     }
 }

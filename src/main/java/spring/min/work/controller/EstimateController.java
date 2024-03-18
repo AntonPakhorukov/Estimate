@@ -13,7 +13,10 @@ import spring.min.work.service.EstimateService;
 import spring.min.work.service.UserServiceImpl;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class EstimateController {
@@ -92,7 +95,14 @@ public class EstimateController {
 
     @PostMapping("/createEstimate/deleteAll")
     public String deleteAllEstimate(Model model, Principal principal) {
-        estimateService.deleteAll();
+//        List<Estimate> estimates = estimateService.getAll();
+        List<Estimate> toDeleteEstimate = new ArrayList<>();
+        for (Estimate estimate : estimateService.getAll()) {
+            if(estimate.getUser().getUsername().equals(principal.getName())){
+                toDeleteEstimate.add(estimate);
+            }
+        }
+        estimateRepository.deleteAll(toDeleteEstimate);
         model.addAttribute("estimates", userService
                 .getUserByName(principal.getName()).getEstimates());
         return "createEstimate";
