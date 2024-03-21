@@ -2,7 +2,7 @@ spring:
   main:
     allow-circular-references: true
   jpa:
-    generate-ddl: true # возьмет на себя создание структуры данных БД
+    generate-ddl: true
     hibernate:
       ddl-auto: update
     properties:

@@ -47,7 +47,6 @@ public class EstimateServiceImpl implements EstimateService {
         return result;
     }
     public void deleteAll(String name){
-
         estimateRepository.deleteAll();
     }
 }
